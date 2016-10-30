@@ -11,7 +11,7 @@ approx. 10cm forwards, then approx. 10cm backwards, then approx. 10cm to the
 left and approx. 10cm to the right. Afterwards it will ”unfold” the arm and
 ”fold” it again.
 
-If you want to write your own application you can use this sources and folder
+If you want to write your own application you can use this source and folder
 structure as a template.
 
 
