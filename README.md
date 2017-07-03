@@ -1,37 +1,81 @@
-## Welcome to GitHub Pages
+## Setting ROS Indigo for youbot
 
-You can use the [editor on GitHub](https://github.com/shivangg/copyBot/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Steps
+* Install ROS indigo-full-desktop from official instruction
+* Install Youbot driver
+	
+	```shell
+	sudo apt-get install ros-indigo-youbot-driver
+	export YOUBOT_CONFIG_FOLDER_LOCATION=/opt/ros/indigo/etc/youbot_driver/config/
+	```
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* install Youbot ROS wrapper
+	
+	```shell
+	sudo apt-get install ros-indigo-youbot-driver-ros-interface ros-indigo-youbot-description
+	sudo setcap cap_net_raw+ep /opt/ros/indigo/lib/youbot_driver_ros_interface/youbot_driver_ros_interface
+	sudo ldconfig /opt/ros/indigo/lib
+	```
 
-### Markdown
+* install the MoveIt Controller !
+	
+	```shell
+	sudo apt-get install ros-indigo-moveit
+	```
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* install openni_launch
+	
+	```shell
+	sudo apt-get install ros-indigo-openni-launch
+	```
 
-```markdown
-Syntax highlighted code block
+* install the joypad package
+	
+	```shell	
+	sudo apt-get install ros-indigo-joy
+	```
 
-# Header 1
-## Header 2
-### Header 3
+* install Eigen3 if problems
 
-- Bulleted
-- List
+	```shell
+					# pkg_search_module(Eigen3 REQUIRED eigen3)
+					include_directories(${EIGEN3_INCLUDE_DIR})
+					add_definitions(${EIGEN3_DEFINITIONS})
 
-1. Numbered
-2. List
+					if(NOT EIGEN3_FOUND)
+					    # Fallback to cmake_modules
+					    find_package(cmake_modules REQUIRED)
+					    find_package(Eigen REQUIRED)
+					    set(EIGEN3_INCLUDE_DIRS ${EIGEN_INCLUDE_DIRS})
+					    set(EIGEN3_LIBRARIES ${EIGEN_LIBRARIES})  
+					    # Possibly map additional variables to the EIGEN3_ prefix.
+					else()
+					    set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+					endif()
 
-**Bold** and _Italic_ and `Code` text
+					# catkin_package(
+					#     ...
+					#     DEPENDS Eigen
+					#     ...
+					# )
 
-[Link](url) and ![Image](src)
-```
+					# include_directories(
+					#     ...
+					#     ${Eigen_INCLUDE_DIRS}
+					# )	
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+	```
 
-### Jekyll Themes
+* Delete/rename youbot-driver, youbot-oold and such packages because they were installed by apt-get
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/shivangg/copyBot/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* Refer the controller of sven to make the yiming package work!
 
-### Support or Contact
+	**AND**
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+* try the kinematic solver of the yiming to work with Moveit! API
+
+
+
+**Other way**
+
+* take the end value, Pause(break point), run again.
