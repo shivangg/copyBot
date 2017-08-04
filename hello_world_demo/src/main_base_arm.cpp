@@ -60,7 +60,8 @@ int main(int argc, char const * argv[])
 		myYouBotManipulator->calibrateManipulator();
 
 		youBotHasArm = true;
-	} catch (std::exception& e) {
+	} 
+	catch (std::exception& e) {
 		LOG(warning) << e.what();
 		youBotHasArm = false;
 	}
@@ -83,17 +84,23 @@ int main(int argc, char const * argv[])
 		if (youBotHasBase && youBotHasArm) 
 		{
 
-/////////////////////////////to move the youbot_base using data from infile////////////////////////////////////////////
+//////////to move the youbot_base using data from infile////////////////////////
 
 			fstream infile;
 			double leapX, leapY, leapR, j1, j2, j3, j4, j5,atStart, atEnd, loopEnabled;			//use xyzrpy array
 			double startPos[5], endPos[5];
-			double lj1 = 0.0110692, lj2 = 0.0110692, lj3 = -5.03655, lj4 = 0.0321239, lj5 = 0.120619, joint_diff;							//last joint position
+			double lj1 = 0.0110692;
+			double lj2 = 0.0110692;
+			double lj3 = -5.03655;
+			double lj4 = 0.0321239; 
+			double lj5 = 0.120619; 
+			double joint_diff;							
+			//last joint position
 
 			while(1)
 				 {
-					infile.open("/opt/lampp/htdocs/NiYantra/labviewdata/leap.txt");
-					
+					infile.open("/home/youbot/shivx/youbotJoint.txt");
+										
 					//inputting datastream & logging to the terminal
 					infile >>  leapX >> leapY >> leapR >> j1 >> j2 >> j3 >> j4 >> j5 >> atStart >> atEnd >> loopEnabled;
 					//cout << "leapX " << leapX << "\t" << leapY << "\t" << leapR << "\t";
